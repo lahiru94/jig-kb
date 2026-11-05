@@ -1,0 +1,38 @@
+{
+  "name": "jig",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "platform/*",
+    "sample-org/services/*",
+    "sample-org/legacy-erp",
+    "sample-org/history"
+  ],
+  "scripts": {
+    "lint:capability": "tsx scripts/check-capability-agnostic.ts",
+    "build": "npm run lint:capability && tsc -p tsconfig.build.json && npm run build -w @jig/web",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p platform/web/tsconfig.json --noEmit",
+    "test": "vitest run",
+    "ci": "npm run lint:capability && npm run typecheck && npm run build -w @jig/web && npm run test",
+    "schema:build": "bash schema/build.sh",
+    "kb:validate": "tsx scripts/kb-validate.ts",
+    "hooks:install": "tsx scripts/install-hooks.ts",
+    "benchmark": "tsx scripts/benchmark.ts",
+    "demo": "tsx scripts/demo.ts"
+  },
+  "devDependencies": {
+    "@happy-dom/global-registrator": "21.0.3",
+    "@playwright/test": "1.64.1",
+    "@testing-library/react": "16.3.3",
+    "@types/jsonld": "1.5.15",
+    "@types/node": "^22.10.0",
+    "@types/pg": "8.23.1",
+    "@types/sql.js": "1.4.11",
+    "@types/ws": "8.18.2",
+    "happy-dom": "21.0.3",
+    "pg": "8.23.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  }
+}

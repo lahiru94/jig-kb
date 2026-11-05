@@ -1,0 +1,15 @@
+export const packageName = "@jig/kb-ops";
+export * from "./types";
+export * from "./tools";
+export * from "./mcp";
+export * from "./audit";
+export * from "./validation";
+export * from "./service";
+export * from "./query";
+export * from "./evaluator";
+export * from "./facts";
+export * from "./floors";
+export * from "./actions";
+export * from "./replay";
+export { DirectoryKbSource, applyChanges, buildView, changeNode, type DeltaReader, type KbSource, type KbView, type NodeChange } from "@jig/kb-core";
+export * from "./views";

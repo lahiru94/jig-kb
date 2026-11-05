@@ -1,0 +1,10 @@
+export const packageName = "@jig/governance";
+export * from "./git-repo";
+export * from "./deltas";
+export * from "./git-source";
+export * from "./checks";
+export * from "./apply";
+export * from "./impact";
+export * from "./simulate";
+export * from "./evidence";
+export * from "./edit";

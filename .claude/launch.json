@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "jig",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "demo", "--", "start"],
+      "port": 4300
+    }
+  ]
+}

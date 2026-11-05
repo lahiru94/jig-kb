@@ -1,0 +1,5 @@
+{
+  "description": "Terms that identify a specific business capability. Platform source code must not contain them; capability behavior belongs in KB data.",
+  "scannedGlobs": ["platform/*/src"],
+  "terms": ["refund", "cancellation", "ordercancel", "loyalty", "clawback", "giftcard", "gift_card", "gift-card"]
+}

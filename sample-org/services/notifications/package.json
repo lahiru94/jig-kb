@@ -1,0 +1,12 @@
+{
+  "name": "@sample/notifications",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/main.ts"
+  },
+  "dependencies": {
+    "@sample/shared": "*"
+  }
+}

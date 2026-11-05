@@ -1,0 +1,13 @@
+{
+  "name": "@jig/executor",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@jig/kb-core": "*",
+    "pg": "8.23.1"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@jig/kb-core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@cedar-policy/cedar-wasm": "4.14.0",
+    "@marcbachmann/cel-js": "8.0.0",
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1",
+    "jsonld": "8.3.3",
+    "yaml": "2.6.1"
+  }
+}

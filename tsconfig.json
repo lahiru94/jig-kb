@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": [
+    "platform/*/src/**/*.ts",
+    "platform/*/test/**/*.ts",
+    "scripts/**/*.ts",
+    "sample-org/**/*.ts",
+    "vitest.config.ts"
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "sample-org/legacy-erp/data/**",
+    "platform/web/**"
+  ]
+}

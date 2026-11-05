@@ -1,0 +1,17 @@
+# Planted problems
+
+The sample retailer (Brightmere Goods) contains these deliberate problems for the jig demo and the extraction benchmark. Each one says where it lives, and how the KB should represent it (see the ground-truth KB in `sample-org/kb/`).
+
+| # | Problem | Where it lives | How the KB represents it |
+|---|---|---|---|
+| 1 | **Policy contradicts code.** The refund policy says 30 days for every customer, but the code allows 45 days for Gold members. | `docs/policies/refund-policy.md` §1. `services/returns/src/main.ts` lines 22–23 (`windowDays`) and line 55. | `rule.refund-window` with a `stated` claim (30 days) and an `inferred` claim (45 for Gold), joined by an **open conflict**. |
+| 2 | **Undocumented loyalty clawback.** Refunds claw back loyalty points, but only for orders placed on or after 2025-01-01, and always *all* the order's points, even for a partial refund. The loyalty terms don't mention clawback at all. | `services/loyalty/src/main.ts` line 22 (`CLAWBACK_CUTOFF`) and line 71. Absent from `docs/loyalty/loyalty-terms.md`. | `rule.loyalty-clawback`, a rule inferred from code only, enforced in `component.loyalty-service`. A **dependency** of the partial-refund change. |
+| 3 | **The finance job assumes one refund per order.** The legacy ERP keeps one refund row per order (`INSERT OR REPLACE`), so a second partial refund overwrites the first and the nightly report overstates net revenue. | `legacy-erp/src/erp.ts` line 17 (comment) and line 39. Shown by the stack test "two partial refunds without the KB make the nightly finance report wrong". | `rule.single-refund-per-order` (inferred from code). `job.nightly-finance`, part of the `described` legacy ERP, **depends on** it, so the job appears in the impact analysis of any partial-refund change. |
+| 4 | **Two definitions of "active customer".** Marketing means "logged in during the last 90 days", while Finance means "bought something in the last 12 months". | `services/storefront/src/main.ts` line 3, and `legacy-erp/src/erp.ts` line 69. | `term.active-customer` with two `inferred` claims and an **open conflict**. |
+| 5 | **The EU 14-day withdrawal right is nowhere in code.** The policy states it, but no service implements it: the refund window check uses only 30 or 45 days, and the approval limit can delay EU refunds. | `docs/policies/refund-policy.md` §4 only. | `constraint.eu-withdrawal-right` that `rule.refund-window` and `rule.refund-approval-limit` are **governed by**, and a **gap**: `rule.eu-withdrawal-refund` has no enforcement (`kb-layer: false`, no components). |
+| 6 | **Manual gift-card reconciliation, known only to staff.** Gift-card refunds are reconciled by hand in a spreadsheet by one person every Friday. | `docs/process-notes/customer-service-handbook.md` ("Gift card refunds"). Nowhere in code. | `process.gift-card-reconciliation` owned by `actor.priya`, with a `stated` claim from the handbook and no implementing system. A **gap** and a single point of failure. |
+
+## Supporting problems for the demo
+
+- **The customer email assumes full refunds.** The `refund_completed` template says "fully refunded" even for partial refunds (`services/notifications/src/main.ts` line 17). It appears in the partial-refund impact ripple as `interface.refund-email`.
+- **Supervisors approve almost every refund over $500.** The handbook says this, and the seeded history shows an override rate above 80 percent. That is the evidence behind the proposal to raise `rule.refund-approval-limit`.

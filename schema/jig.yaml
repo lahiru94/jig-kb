@@ -1,0 +1,486 @@
+id: https://jig.skaleminds.com/schema/jig
+name: jig
+title: jig knowledge base meta-model
+description: >-
+  Meta-model for the jig knowledge base (KB). It describes an organization's real world, its digital
+  implementation and the operational nodes the platform uses to govern and run it. Each KB node is
+  one Markdown file whose YAML frontmatter conforms to one class below. Frontmatter keys are written
+  in kebab-case and map to the snake_case slots here.
+
+  Link slots carry two annotations: `link: true`, and `targets`, a space-separated list of allowed
+  target kinds ("*" means any). Allowed source kinds are the classes that use the slot. The KB
+  validator enforces these graph constraints. JSON Schema does not.
+version: 0.1.0
+license: proprietary
+prefixes:
+  linkml: https://w3id.org/linkml/
+  jig: https://jig.skaleminds.com/schema/jig/
+  kb: https://jig.skaleminds.com/kb/
+default_prefix: jig
+default_range: string
+imports:
+  - linkml:types
+
+# ---------------------------------------------------------------------------
+# Enumerations
+# ---------------------------------------------------------------------------
+enums:
+  Confidence:
+    description: How much a claim can be trusted.
+    permissible_values:
+      inferred:
+        description: Drawn by an agent or tool from code or other evidence, not confirmed by a person.
+      stated:
+        description: Stated by a person or a document.
+      verified:
+        description: Confirmed by a named person.
+  ConflictStatus:
+    permissible_values:
+      open: {}
+      resolved: {}
+  Mode:
+    description: How the platform relates to a system, component or action (design D16).
+    permissible_values:
+      described:
+        description: Modelled and explained, included in impact analysis, but not operated.
+      connected:
+        description: Governed and operated through bindings. An existing system does the work.
+      native:
+        description: Hosted and run by the platform itself.
+  FieldType:
+    permissible_values:
+      string: {}
+      int: {}
+      decimal: {}
+      bool: {}
+      date: {}
+      timestamp: {}
+      enum: {}
+      ref:
+        description: A reference to an instance of another DataEntity (see `ref`).
+      list: {}
+  StepKind:
+    description: >-
+      Kinds of action step. The MVP registers only `binding-call`. Other kinds (for example
+      emit-event, wait-for-human or call-action) are registered later without executor changes.
+    permissible_values:
+      binding-call: {}
+  DecisionStatus:
+    permissible_values:
+      proposed: {}
+      accepted: {}
+      superseded: {}
+      rejected: {}
+
+# ---------------------------------------------------------------------------
+# Slots
+# ---------------------------------------------------------------------------
+slots:
+  id:
+    identifier: true
+    required: true
+    pattern: "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$"
+    description: Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.
+  kind:
+    required: true
+    designates_type: true
+    description: The node kind. Must name one of the concrete classes in this schema.
+  title:
+    required: true
+  description: {}
+  tags:
+    multivalued: true
+  claims:
+    range: Claim
+    multivalued: true
+    inlined_as_list: true
+    description: Facts stated about this node, each with its source and confidence.
+  conflicts:
+    range: Conflict
+    multivalued: true
+    inlined_as_list: true
+
+  # --- typed links -------------------------------------------------------
+  owned_by:
+    multivalued: true
+    annotations: {link: true, targets: "Actor Role"}
+  depends_on:
+    multivalued: true
+    annotations: {link: true, targets: "*"}
+  decided_by:
+    multivalued: true
+    annotations: {link: true, targets: "Decision"}
+  governed_by:
+    multivalued: true
+    annotations: {link: true, targets: "Constraint Goal"}
+  part_of:
+    multivalued: true
+    description: Containment, for example a Step is part of a Process and a Component is part of a System.
+    annotations: {link: true, targets: "Capability Process System Component"}
+  implemented_by:
+    multivalued: true
+    annotations: {link: true, targets: "Component System Job Interface Action"}
+  realized_by:
+    multivalued: true
+    annotations: {link: true, targets: "Job Component System Action"}
+  defines:
+    multivalued: true
+    annotations: {link: true, targets: "DataEntity"}
+  enforced_on:
+    multivalued: true
+    annotations: {link: true, targets: "Action"}
+  binds_to:
+    multivalued: true
+    annotations: {link: true, targets: "System Component Interface DataEntity"}
+  uses:
+    multivalued: true
+    description: Derivations or bindings that a rule, policy, action or derivation needs.
+    annotations: {link: true, targets: "Derivation Binding"}
+  notifies:
+    multivalued: true
+    description: Interfaces or components informed as a side effect, for example a customer notification template.
+    annotations: {link: true, targets: "Interface Component"}
+  roles:
+    multivalued: true
+    annotations: {link: true, targets: "Role"}
+  resource:
+    description: The DataEntity an action operates on.
+    annotations: {link: true, targets: "DataEntity"}
+
+  # --- business rules ----------------------------------------------------
+  statement:
+    description: The rule in plain language.
+  check:
+    description: >-
+      Optional executable check, written as a Cedar policy in a ```cedar block in the body. The
+      loader fills this slot from the body.
+  enforcement:
+    range: Enforcement
+    inlined: true
+  override_threshold:
+    range: OverrideThreshold
+    inlined: true
+
+  # --- terms, decisions --------------------------------------------------
+  definition: {}
+  status:
+    range: DecisionStatus
+  decided_at:
+    range: date
+
+  # --- modes and data ----------------------------------------------------
+  mode:
+    range: Mode
+    ifabsent: string(described)
+  fields:
+    range: FieldDef
+    multivalued: true
+    inlined_as_list: true
+  identity:
+    multivalued: true
+    description: Names of the fields that together identify an instance.
+
+  # --- actions, bindings, derivations, policies, permissions ------------
+  inputs:
+    range: FieldDef
+    multivalued: true
+    inlined_as_list: true
+  facts:
+    range: FactSpec
+    multivalued: true
+    inlined_as_list: true
+  steps:
+    range: ActionStep
+    multivalued: true
+    inlined_as_list: true
+  binding_type:
+    description: Name of a registered binding type, for example `rest` or `sql`.
+  config:
+    range: Any
+    description: Binding-type-specific configuration, such as method, path, query and parameter mapping.
+  expression:
+    description: The CEL expression, from a ```cel block in the body.
+  output_type:
+    range: FieldType
+  policy_text:
+    description: Cedar policy text, from a ```cedar block in the body.
+  operation:
+    description: >-
+      The operation a permission applies to: an action id, or a KB operation name
+      such as `kb.approve`, `kb.apply-delta` or `kb.query`.
+  level:
+    range: integer
+    minimum_value: 1
+    maximum_value: 3
+    description: "1: autonomous, 2: human-required, 3: forbidden."
+  condition:
+    description: Optional Cedar condition (the body of a `when` clause) restricting when the declaration applies.
+
+# ---------------------------------------------------------------------------
+# Classes
+# ---------------------------------------------------------------------------
+classes:
+  Any:
+    class_uri: linkml:Any
+
+  Claim:
+    description: One stated fact with its source and confidence.
+    attributes:
+      says:
+        required: true
+      source:
+        required: true
+        pattern: "^(code|doc|person|meeting|system):.+$"
+        description: >-
+          Where the fact came from, for example `code:<path>#L12-L28`, `doc:<path>#p2`,
+          `person:<actor id>`, `meeting:<date>-<topic>` or `system:<id>`.
+      confidence:
+        range: Confidence
+        required: true
+      verified_by: {}
+      verified_at:
+        range: date
+
+  Conflict:
+    description: Two or more claims on the same node that disagree.
+    attributes:
+      about:
+        required: true
+        description: The fact the claims disagree on.
+      claims:
+        range: integer
+        multivalued: true
+        required: true
+        minimum_cardinality: 2
+        description: Indexes into the node's `claims` list.
+      status:
+        range: ConflictStatus
+        required: true
+      chosen:
+        range: integer
+        description: Index of the chosen claim, required when resolved.
+      resolved_by: {}
+      resolved_at:
+        range: date
+
+  Enforcement:
+    description: Where a business rule is enforced. Both empty means the rule is not enforced.
+    attributes:
+      kb_layer:
+        range: boolean
+        required: true
+      components:
+        multivalued: true
+        annotations: {link: true, targets: "Component System Job"}
+
+  OverrideThreshold:
+    description: When humans override this rule's decisions this often, draft a delta proposal.
+    attributes:
+      rate:
+        range: float
+        required: true
+        minimum_value: 0
+        maximum_value: 1
+      window_days:
+        range: integer
+        required: true
+        minimum_value: 1
+      min_samples:
+        range: integer
+        minimum_value: 1
+
+  FieldDef:
+    description: A typed field of a DataEntity, or an input of an Action.
+    attributes:
+      name:
+        required: true
+        pattern: "^[a-z][a-z0-9_]*$"
+      type:
+        range: FieldType
+        required: true
+      required:
+        range: boolean
+      values:
+        multivalued: true
+        description: Permitted values for `enum` fields.
+      ref:
+        description: DataEntity id for `ref` fields.
+        annotations: {link: true, targets: "DataEntity"}
+      min:
+        range: float
+      max:
+        range: float
+      pattern: {}
+      description: {}
+
+  FactSpec:
+    description: A fact an action needs before evaluation, gathered from a binding or computed by a derivation.
+    attributes:
+      name:
+        required: true
+        pattern: "^[a-z][a-z0-9_]*$"
+      type:
+        range: FieldType
+        required: true
+      binding:
+        annotations: {link: true, targets: "Binding"}
+      derivation:
+        annotations: {link: true, targets: "Derivation"}
+      with:
+        range: Any
+        description: 'Parameter mapping from inputs and other facts, for example `{order_id: "$input.order_id"}`.'
+      path:
+        description: Path into the binding result, for example `delivered_at`.
+
+  ActionStep:
+    description: One step of an action. `kind` selects the registered step type.
+    attributes:
+      name:
+        required: true
+      kind:
+        range: StepKind
+        required: true
+      binding:
+        annotations: {link: true, targets: "Binding"}
+      with:
+        range: Any
+      compensate:
+        range: Compensation
+        inlined: true
+
+  Compensation:
+    attributes:
+      binding:
+        required: true
+        annotations: {link: true, targets: "Binding"}
+      with:
+        range: Any
+
+  KbFile:
+    tree_root: true
+    description: Container used only for schema generation. KB files hold one node each.
+    attributes:
+      nodes:
+        range: Node
+        multivalued: true
+        inlined_as_list: true
+
+  Node:
+    abstract: true
+    slots: [id, kind, title, description, tags, claims, conflicts, owned_by, depends_on, decided_by, governed_by]
+
+  RealWorldNode:
+    abstract: true
+    is_a: Node
+  DigitalNode:
+    abstract: true
+    is_a: Node
+  OperationalNode:
+    abstract: true
+    is_a: Node
+
+  # --- real-world kinds -------------------------------------------------
+  Goal:
+    is_a: RealWorldNode
+  Constraint:
+    is_a: RealWorldNode
+    description: A regulation, policy or other external constraint.
+    slots: [statement]
+  Capability:
+    is_a: RealWorldNode
+    slots: [implemented_by, realized_by]
+  Process:
+    is_a: RealWorldNode
+    slots: [part_of, implemented_by, realized_by]
+  Step:
+    is_a: RealWorldNode
+    slots: [part_of, implemented_by, realized_by]
+  BusinessRule:
+    is_a: RealWorldNode
+    slots: [statement, check, enforcement, part_of, implemented_by, enforced_on, uses, notifies, override_threshold]
+    slot_usage:
+      statement:
+        required: true
+      enforcement:
+        required: true
+  Term:
+    is_a: RealWorldNode
+    slots: [definition, defines]
+    slot_usage:
+      definition:
+        required: true
+  Actor:
+    is_a: RealWorldNode
+    description: A person or team. Session users are Actors.
+    slots: [roles]
+  Role:
+    is_a: RealWorldNode
+  Decision:
+    is_a: RealWorldNode
+    slots: [status, decided_at]
+
+  # --- digital kinds ----------------------------------------------------
+  System:
+    is_a: DigitalNode
+    slots: [mode]
+  Component:
+    is_a: DigitalNode
+    slots: [mode, part_of, notifies]
+  Interface:
+    is_a: DigitalNode
+    slots: [part_of]
+  DataEntity:
+    is_a: DigitalNode
+    slots: [fields, identity, part_of]
+    slot_usage:
+      fields:
+        required: true
+      identity:
+        required: true
+  Job:
+    is_a: DigitalNode
+    slots: [part_of, uses]
+  Agent:
+    is_a: DigitalNode
+    slots: [roles]
+
+  # --- operational kinds ------------------------------------------------
+  Action:
+    is_a: OperationalNode
+    slots: [mode, part_of, resource, inputs, facts, steps, uses, notifies]
+    slot_usage:
+      resource:
+        required: true
+  Binding:
+    is_a: OperationalNode
+    slots: [binding_type, config, binds_to]
+    slot_usage:
+      binding_type:
+        required: true
+      binds_to:
+        required: true
+  Derivation:
+    is_a: OperationalNode
+    slots: [inputs, expression, output_type, uses]
+    slot_usage:
+      expression:
+        required: true
+      output_type:
+        required: true
+  Policy:
+    is_a: OperationalNode
+    slots: [policy_text, enforced_on, uses]
+    slot_usage:
+      policy_text:
+        required: true
+  Permission:
+    is_a: OperationalNode
+    description: A permission declaration giving an operation, the roles it applies to, an optional condition and a level.
+    slots: [operation, roles, condition, level]
+    slot_usage:
+      operation:
+        required: true
+      roles:
+        required: true
+      level:
+        required: true

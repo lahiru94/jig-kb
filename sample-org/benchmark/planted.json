@@ -1,0 +1,8 @@
+[
+  { "id": "1", "title": "Policy says 30 days, code gives Gold members 45", "node": "rule.refund-window", "sources": ["code:sample-org/services/returns/src/main.ts#L22-L23", "doc:sample-org/docs/policies/refund-policy.md#1"] },
+  { "id": "2", "title": "Undocumented loyalty clawback after the 2025 cut-off", "node": "rule.loyalty-clawback", "sources": ["code:sample-org/services/loyalty/src/main.ts#L22", "code:sample-org/services/loyalty/src/main.ts#L71"] },
+  { "id": "3", "title": "Finance job assumes one refund per order", "node": "rule.single-refund-per-order", "sources": ["code:sample-org/legacy-erp/src/erp.ts#L17-L39"] },
+  { "id": "4", "title": "Two definitions of active customer", "node": "term.active-customer", "sources": ["code:sample-org/services/storefront/src/main.ts#L3", "code:sample-org/legacy-erp/src/erp.ts#L69"] },
+  { "id": "5", "title": "EU 14-day withdrawal right, nowhere in code", "node": "rule.eu-withdrawal-refund", "sources": ["doc:sample-org/docs/policies/refund-policy.md#4"] },
+  { "id": "6", "title": "Manual gift-card reconciliation, known only to staff", "node": "process.gift-card-reconciliation", "sources": ["doc:sample-org/docs/process-notes/customer-service-handbook.md#gift-card-refunds-manual"] }
+]

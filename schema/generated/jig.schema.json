@@ -1,0 +1,3485 @@
+{
+    "$defs": {
+        "Action": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "facts": {
+                    "items": {
+                        "$ref": "#/$defs/FactSpec"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "inputs": {
+                    "items": {
+                        "$ref": "#/$defs/FieldDef"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Action"
+                    ],
+                    "type": "string"
+                },
+                "mode": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Mode"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "notifies": {
+                    "description": "Interfaces or components informed as a side effect, for example a customer notification template.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "part_of": {
+                    "description": "Containment, for example a Step is part of a Process and a Component is part of a System.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "resource": {
+                    "description": "The DataEntity an action operates on.",
+                    "type": "string"
+                },
+                "steps": {
+                    "items": {
+                        "$ref": "#/$defs/ActionStep"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                },
+                "uses": {
+                    "description": "Derivations or bindings that a rule, policy, action or derivation needs.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "resource",
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Action",
+            "type": "object"
+        },
+        "ActionStep": {
+            "additionalProperties": false,
+            "description": "One step of an action. `kind` selects the registered step type.",
+            "properties": {
+                "binding": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "compensate": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Compensation"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "kind": {
+                    "$ref": "#/$defs/StepKind"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "with": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Any"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "name",
+                "kind"
+            ],
+            "title": "ActionStep",
+            "type": "object"
+        },
+        "Actor": {
+            "additionalProperties": false,
+            "description": "A person or team. Session users are Actors.",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Actor"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "roles": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Actor",
+            "type": "object"
+        },
+        "Agent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Agent"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "roles": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Agent",
+            "type": "object"
+        },
+        "Any": {
+            "additionalProperties": true,
+            "description": "",
+            "title": "Any",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "Binding": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "binding_type": {
+                    "description": "Name of a registered binding type, for example `rest` or `sql`.",
+                    "type": "string"
+                },
+                "binds_to": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "config": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Any"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Binding-type-specific configuration, such as method, path, query and parameter mapping."
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Binding"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "binding_type",
+                "binds_to",
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Binding",
+            "type": "object"
+        },
+        "BusinessRule": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "check": {
+                    "description": "Optional executable check, written as a Cedar policy in a ```cedar block in the body. The loader fills this slot from the body.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "enforced_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "enforcement": {
+                    "$ref": "#/$defs/Enforcement"
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "implemented_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "BusinessRule"
+                    ],
+                    "type": "string"
+                },
+                "notifies": {
+                    "description": "Interfaces or components informed as a side effect, for example a customer notification template.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "override_threshold": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/OverrideThreshold"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "part_of": {
+                    "description": "Containment, for example a Step is part of a Process and a Component is part of a System.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "statement": {
+                    "description": "The rule in plain language.",
+                    "type": "string"
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                },
+                "uses": {
+                    "description": "Derivations or bindings that a rule, policy, action or derivation needs.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "statement",
+                "enforcement",
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "BusinessRule",
+            "type": "object"
+        },
+        "Capability": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "implemented_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Capability"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "realized_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Capability",
+            "type": "object"
+        },
+        "Claim": {
+            "additionalProperties": false,
+            "description": "One stated fact with its source and confidence.",
+            "properties": {
+                "confidence": {
+                    "$ref": "#/$defs/Confidence"
+                },
+                "says": {
+                    "type": "string"
+                },
+                "source": {
+                    "description": "Where the fact came from, for example `code:<path>#L12-L28`, `doc:<path>#p2`, `person:<actor id>`, `meeting:<date>-<topic>` or `system:<id>`.",
+                    "pattern": "^(code|doc|person|meeting|system):.+$",
+                    "type": "string"
+                },
+                "verified_at": {
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "verified_by": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "says",
+                "source",
+                "confidence"
+            ],
+            "title": "Claim",
+            "type": "object"
+        },
+        "Compensation": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "binding": {
+                    "type": "string"
+                },
+                "with": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Any"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "binding"
+            ],
+            "title": "Compensation",
+            "type": "object"
+        },
+        "Component": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Component"
+                    ],
+                    "type": "string"
+                },
+                "mode": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Mode"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "notifies": {
+                    "description": "Interfaces or components informed as a side effect, for example a customer notification template.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "part_of": {
+                    "description": "Containment, for example a Step is part of a Process and a Component is part of a System.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Component",
+            "type": "object"
+        },
+        "Confidence": {
+            "description": "How much a claim can be trusted.",
+            "enum": [
+                "inferred",
+                "stated",
+                "verified"
+            ],
+            "title": "Confidence",
+            "type": "string"
+        },
+        "Conflict": {
+            "additionalProperties": false,
+            "description": "Two or more claims on the same node that disagree.",
+            "properties": {
+                "about": {
+                    "description": "The fact the claims disagree on.",
+                    "type": "string"
+                },
+                "chosen": {
+                    "description": "Index of the chosen claim, required when resolved.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "claims": {
+                    "description": "Indexes into the node's `claims` list.",
+                    "items": {
+                        "type": "integer"
+                    },
+                    "minItems": 2,
+                    "type": "array"
+                },
+                "resolved_at": {
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "resolved_by": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "status": {
+                    "$ref": "#/$defs/ConflictStatus"
+                }
+            },
+            "required": [
+                "about",
+                "claims",
+                "status"
+            ],
+            "title": "Conflict",
+            "type": "object"
+        },
+        "ConflictStatus": {
+            "description": "",
+            "enum": [
+                "open",
+                "resolved"
+            ],
+            "title": "ConflictStatus",
+            "type": "string"
+        },
+        "Constraint": {
+            "additionalProperties": false,
+            "description": "A regulation, policy or other external constraint.",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Constraint"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "statement": {
+                    "description": "The rule in plain language.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Constraint",
+            "type": "object"
+        },
+        "DataEntity": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "fields": {
+                    "items": {
+                        "$ref": "#/$defs/FieldDef"
+                    },
+                    "type": "array"
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "identity": {
+                    "description": "Names of the fields that together identify an instance.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "DataEntity"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "part_of": {
+                    "description": "Containment, for example a Step is part of a Process and a Component is part of a System.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "fields",
+                "identity",
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "DataEntity",
+            "type": "object"
+        },
+        "Decision": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_at": {
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Decision"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "status": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/DecisionStatus"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Decision",
+            "type": "object"
+        },
+        "DecisionStatus": {
+            "description": "",
+            "enum": [
+                "proposed",
+                "accepted",
+                "superseded",
+                "rejected"
+            ],
+            "title": "DecisionStatus",
+            "type": "string"
+        },
+        "Derivation": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "expression": {
+                    "description": "The CEL expression, from a ```cel block in the body.",
+                    "type": "string"
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "inputs": {
+                    "items": {
+                        "$ref": "#/$defs/FieldDef"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Derivation"
+                    ],
+                    "type": "string"
+                },
+                "output_type": {
+                    "$ref": "#/$defs/FieldType"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                },
+                "uses": {
+                    "description": "Derivations or bindings that a rule, policy, action or derivation needs.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "expression",
+                "output_type",
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Derivation",
+            "type": "object"
+        },
+        "DigitalNode": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "DigitalNode"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "DigitalNode",
+            "type": "object"
+        },
+        "Enforcement": {
+            "additionalProperties": false,
+            "description": "Where a business rule is enforced. Both empty means the rule is not enforced.",
+            "properties": {
+                "components": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "kb_layer": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "kb_layer"
+            ],
+            "title": "Enforcement",
+            "type": "object"
+        },
+        "FactSpec": {
+            "additionalProperties": false,
+            "description": "A fact an action needs before evaluation, gathered from a binding or computed by a derivation.",
+            "properties": {
+                "binding": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "derivation": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "pattern": "^[a-z][a-z0-9_]*$",
+                    "type": "string"
+                },
+                "path": {
+                    "description": "Path into the binding result, for example `delivered_at`.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "$ref": "#/$defs/FieldType"
+                },
+                "with": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Any"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Parameter mapping from inputs and other facts, for example `{order_id: \"$input.order_id\"}`."
+                }
+            },
+            "required": [
+                "name",
+                "type"
+            ],
+            "title": "FactSpec",
+            "type": "object"
+        },
+        "FieldDef": {
+            "additionalProperties": false,
+            "description": "A typed field of a DataEntity, or an input of an Action.",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "max": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "min": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "pattern": "^[a-z][a-z0-9_]*$",
+                    "type": "string"
+                },
+                "pattern": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "ref": {
+                    "description": "DataEntity id for `ref` fields.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "required": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "$ref": "#/$defs/FieldType"
+                },
+                "values": {
+                    "description": "Permitted values for `enum` fields.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "name",
+                "type"
+            ],
+            "title": "FieldDef",
+            "type": "object"
+        },
+        "FieldType": {
+            "description": "",
+            "enum": [
+                "string",
+                "int",
+                "decimal",
+                "bool",
+                "date",
+                "timestamp",
+                "enum",
+                "ref",
+                "list"
+            ],
+            "title": "FieldType",
+            "type": "string"
+        },
+        "Goal": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Goal"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Goal",
+            "type": "object"
+        },
+        "Interface": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Interface"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "part_of": {
+                    "description": "Containment, for example a Step is part of a Process and a Component is part of a System.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Interface",
+            "type": "object"
+        },
+        "Job": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Job"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "part_of": {
+                    "description": "Containment, for example a Step is part of a Process and a Component is part of a System.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                },
+                "uses": {
+                    "description": "Derivations or bindings that a rule, policy, action or derivation needs.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Job",
+            "type": "object"
+        },
+        "KbFile": {
+            "additionalProperties": false,
+            "description": "Container used only for schema generation. KB files hold one node each.",
+            "properties": {
+                "nodes": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/Action"
+                            },
+                            {
+                                "$ref": "#/$defs/Binding"
+                            },
+                            {
+                                "$ref": "#/$defs/Derivation"
+                            },
+                            {
+                                "$ref": "#/$defs/Policy"
+                            },
+                            {
+                                "$ref": "#/$defs/Permission"
+                            },
+                            {
+                                "$ref": "#/$defs/System"
+                            },
+                            {
+                                "$ref": "#/$defs/Component"
+                            },
+                            {
+                                "$ref": "#/$defs/Interface"
+                            },
+                            {
+                                "$ref": "#/$defs/DataEntity"
+                            },
+                            {
+                                "$ref": "#/$defs/Job"
+                            },
+                            {
+                                "$ref": "#/$defs/Agent"
+                            },
+                            {
+                                "$ref": "#/$defs/Goal"
+                            },
+                            {
+                                "$ref": "#/$defs/Constraint"
+                            },
+                            {
+                                "$ref": "#/$defs/Capability"
+                            },
+                            {
+                                "$ref": "#/$defs/Process"
+                            },
+                            {
+                                "$ref": "#/$defs/Step"
+                            },
+                            {
+                                "$ref": "#/$defs/BusinessRule"
+                            },
+                            {
+                                "$ref": "#/$defs/Term"
+                            },
+                            {
+                                "$ref": "#/$defs/Actor"
+                            },
+                            {
+                                "$ref": "#/$defs/Role"
+                            },
+                            {
+                                "$ref": "#/$defs/Decision"
+                            }
+                        ]
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "KbFile",
+            "type": "object"
+        },
+        "Mode": {
+            "description": "How the platform relates to a system, component or action (design D16).",
+            "enum": [
+                "described",
+                "connected",
+                "native"
+            ],
+            "title": "Mode",
+            "type": "string"
+        },
+        "Node": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Node"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Node",
+            "type": "object"
+        },
+        "OperationalNode": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "OperationalNode"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "OperationalNode",
+            "type": "object"
+        },
+        "OverrideThreshold": {
+            "additionalProperties": false,
+            "description": "When humans override this rule's decisions this often, draft a delta proposal.",
+            "properties": {
+                "min_samples": {
+                    "minimum": 1,
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "rate": {
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "window_days": {
+                    "minimum": 1,
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "rate",
+                "window_days"
+            ],
+            "title": "OverrideThreshold",
+            "type": "object"
+        },
+        "Permission": {
+            "additionalProperties": false,
+            "description": "A permission declaration giving an operation, the roles it applies to, an optional condition and a level.",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "condition": {
+                    "description": "Optional Cedar condition (the body of a `when` clause) restricting when the declaration applies.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Permission"
+                    ],
+                    "type": "string"
+                },
+                "level": {
+                    "description": "1: autonomous, 2: human-required, 3: forbidden.",
+                    "maximum": 3,
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "operation": {
+                    "description": "The operation a permission applies to: an action id, or a KB operation name such as `kb.approve`, `kb.apply-delta` or `kb.query`.",
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "roles": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "operation",
+                "roles",
+                "level",
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Permission",
+            "type": "object"
+        },
+        "Policy": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "enforced_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Policy"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "policy_text": {
+                    "description": "Cedar policy text, from a ```cedar block in the body.",
+                    "type": "string"
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                },
+                "uses": {
+                    "description": "Derivations or bindings that a rule, policy, action or derivation needs.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "policy_text",
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Policy",
+            "type": "object"
+        },
+        "Process": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "implemented_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Process"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "part_of": {
+                    "description": "Containment, for example a Step is part of a Process and a Component is part of a System.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "realized_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Process",
+            "type": "object"
+        },
+        "RealWorldNode": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "RealWorldNode"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "RealWorldNode",
+            "type": "object"
+        },
+        "Role": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Role"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Role",
+            "type": "object"
+        },
+        "Step": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "implemented_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Step"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "part_of": {
+                    "description": "Containment, for example a Step is part of a Process and a Component is part of a System.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "realized_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Step",
+            "type": "object"
+        },
+        "StepKind": {
+            "description": "Kinds of action step. The MVP registers only `binding-call`. Other kinds (for example emit-event, wait-for-human or call-action) are registered later without executor changes.",
+            "enum": [
+                "binding-call"
+            ],
+            "title": "StepKind",
+            "type": "string"
+        },
+        "System": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "System"
+                    ],
+                    "type": "string"
+                },
+                "mode": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Mode"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "System",
+            "type": "object"
+        },
+        "Term": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "claims": {
+                    "description": "Facts stated about this node, each with its source and confidence.",
+                    "items": {
+                        "$ref": "#/$defs/Claim"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conflicts": {
+                    "items": {
+                        "$ref": "#/$defs/Conflict"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "decided_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "defines": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "definition": {
+                    "type": "string"
+                },
+                "depends_on": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "governed_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable node id in the form `<kind>.<slug>`. It does not change when the file is renamed.",
+                    "pattern": "^[a-z][a-z0-9-]*\\.[a-z0-9][a-z0-9-]*$",
+                    "type": "string"
+                },
+                "kind": {
+                    "description": "The node kind. Must name one of the concrete classes in this schema.",
+                    "enum": [
+                        "Term"
+                    ],
+                    "type": "string"
+                },
+                "owned_by": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "definition",
+                "id",
+                "kind",
+                "title"
+            ],
+            "title": "Term",
+            "type": "object"
+        }
+    },
+    "$id": "https://jig.skaleminds.com/schema/jig",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": false,
+    "description": "Container used only for schema generation. KB files hold one node each.",
+    "metamodel_version": "1.12.0",
+    "properties": {
+        "nodes": {
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/$defs/Action"
+                    },
+                    {
+                        "$ref": "#/$defs/Binding"
+                    },
+                    {
+                        "$ref": "#/$defs/Derivation"
+                    },
+                    {
+                        "$ref": "#/$defs/Policy"
+                    },
+                    {
+                        "$ref": "#/$defs/Permission"
+                    },
+                    {
+                        "$ref": "#/$defs/System"
+                    },
+                    {
+                        "$ref": "#/$defs/Component"
+                    },
+                    {
+                        "$ref": "#/$defs/Interface"
+                    },
+                    {
+                        "$ref": "#/$defs/DataEntity"
+                    },
+                    {
+                        "$ref": "#/$defs/Job"
+                    },
+                    {
+                        "$ref": "#/$defs/Agent"
+                    },
+                    {
+                        "$ref": "#/$defs/Goal"
+                    },
+                    {
+                        "$ref": "#/$defs/Constraint"
+                    },
+                    {
+                        "$ref": "#/$defs/Capability"
+                    },
+                    {
+                        "$ref": "#/$defs/Process"
+                    },
+                    {
+                        "$ref": "#/$defs/Step"
+                    },
+                    {
+                        "$ref": "#/$defs/BusinessRule"
+                    },
+                    {
+                        "$ref": "#/$defs/Term"
+                    },
+                    {
+                        "$ref": "#/$defs/Actor"
+                    },
+                    {
+                        "$ref": "#/$defs/Role"
+                    },
+                    {
+                        "$ref": "#/$defs/Decision"
+                    }
+                ]
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        }
+    },
+    "title": "jig",
+    "type": "object",
+    "version": "0.1.0"
+}
+
