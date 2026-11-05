@@ -1,8 +1,11 @@
 name: CI
 
+# Automatic runs are disabled for now; trigger manually from the Actions tab.
+# To re-enable, restore:
+#   push:
+#   pull_request:
 on:
-  push:
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   ci:
